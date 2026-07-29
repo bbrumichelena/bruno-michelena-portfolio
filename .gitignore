@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next.js
+.next/
+out/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+
+# vercel
+.vercel
+
+# large media — videos are on YouTube, no need to commit
+public/media/videos/bodas/
+public/media/videos/eventos-musicales/
+public/media/videos/presentaciones/
+public/media/videos/podcast/
+public/media/videos/redes-sociales/
+
+# background video
+public/bg-video.mp4

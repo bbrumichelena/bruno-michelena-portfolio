@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background: #0a0a0a;
+}
+
+body {
+  background: transparent;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

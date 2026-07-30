@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <div className="ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] w-screen">
       {/* Grid que ocupa exactamente el espacio disponible en pantalla */}
-      <div className="grid h-[calc(100svh-10rem)] grid-cols-1 md:grid-cols-[700px_1fr]">
+      <div className="grid h-[calc(100svh-10rem)] grid-cols-1 md:grid-cols-[1fr_420px]">
 
         {/* Columna izquierda: título + texto + banner */}
         <div className="flex flex-col overflow-hidden">

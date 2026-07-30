@@ -1,0 +1,25 @@
+node_modules
+.next
+.git
+.DS_Store
+
+# Videos grandes — van en YouTube
+public/media/videos/bodas
+public/media/videos/eventos-musicales
+public/media/videos/presentaciones
+public/media/videos/podcast
+public/media/videos/portadas videos
+
+# Videos originales de redes-sociales (se usan las versiones _web.mp4)
+public/media/videos/redes-sociales/Automotriz.mp4
+public/media/videos/redes-sociales/GASTRONOMIA.mp4
+public/media/videos/redes-sociales/Marca de ropa.mp4
+public/media/videos/redes-sociales/Empresariales.mp4
+public/media/videos/redes-sociales/Inmobiliario.mp4
+public/media/videos/redes-sociales/Veterinaria.mp4
+public/media/videos/redes-sociales/cosmetologia.mp4
+public/media/videos/redes-sociales/Agencia de IA.mp4
+public/media/videos/redes-sociales/Frigorifico:Carniceria.mp4
+
+# Video de fondo (no necesario en producción)
+public/bg-video.mp4

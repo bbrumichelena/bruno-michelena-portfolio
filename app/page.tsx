@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <div className="ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] w-screen">
       {/* Grid que ocupa exactamente el espacio disponible en pantalla */}
-      <div className="grid h-[calc(100svh-10rem)] grid-cols-1 md:grid-cols-[1fr_580px]">
+      <div className="grid h-[calc(100svh-10rem)] grid-cols-1 md:grid-cols-[1fr_420px]">
 
         {/* Columna izquierda: título + texto + banner */}
         <div className="flex flex-col overflow-hidden">
@@ -21,8 +21,8 @@ Me formé en la Escuela Uruguaya de Fotografía y Video (EUF), donde hice la car
             </p>
           </div>
 
-          {/* Banner horizontal */}
-          <div className="min-h-0 flex-1 overflow-hidden bg-panel" style={{ maxHeight: "200px" }}>
+          {/* Banner horizontal ocupa el espacio restante */}
+          <div className="min-h-0 flex-1 overflow-hidden bg-panel">
             {horizontal ? (
               horizontal.kind === "video" ? (
                 <video src={horizontal.url} controls className="h-full w-full object-cover" />

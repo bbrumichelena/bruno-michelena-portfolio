@@ -45,7 +45,7 @@ Me formé en la Escuela Uruguaya de Fotografía y Video (EUF), donde hice la car
         </div>
 
         {/* Columna derecha: foto vertical ocupa toda la altura */}
-        <div className="h-[60vw] overflow-hidden bg-panel md:h-auto">
+        <div className="h-[55vw] overflow-hidden bg-panel md:h-auto">
           {vertical ? (
             vertical.kind === "video" ? (
               <video src={vertical.url} controls className="h-full w-full object-cover" />
@@ -54,7 +54,7 @@ Me formé en la Escuela Uruguaya de Fotografía y Video (EUF), donde hice la car
               <img
                 src={vertical.url}
                 alt="Bruno Michelena"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-[center_30%]"
               />
             )
           ) : (

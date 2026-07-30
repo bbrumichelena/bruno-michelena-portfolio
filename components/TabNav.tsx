@@ -22,7 +22,7 @@ export default function TabNav() {
   };
 
   return (
-    <nav className="flex flex-wrap items-center gap-2 md:gap-3">
+    <nav className="flex flex-wrap items-center gap-1.5 md:gap-3">
       {TABS.map((tab) => {
         const active = isActive(tab.href);
         return (
@@ -30,7 +30,7 @@ export default function TabNav() {
             key={tab.href}
             href={tab.href}
             className={clsx(
-              "rounded-md px-4 py-2 text-sm font-bold uppercase tracking-wide transition-colors md:text-base",
+              "rounded-md px-2.5 py-1.5 text-xs font-bold uppercase tracking-wide transition-colors md:px-4 md:py-2 md:text-base",
               active
                 ? "bg-white text-black"
                 : "text-white/60 hover:text-white"

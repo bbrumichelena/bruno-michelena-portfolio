@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <div className="ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] w-screen">
       {/* Grid que ocupa exactamente el espacio disponible en pantalla */}
-      <div className="grid h-[calc(100svh-10rem)] grid-cols-1 md:grid-cols-[1fr_420px]">
+      <div className="grid grid-cols-1 md:h-[calc(100svh-10rem)] md:grid-cols-[1fr_420px]">
 
         {/* Columna izquierda: título + texto + banner */}
         <div className="flex flex-col overflow-hidden">
@@ -45,7 +45,7 @@ Me formé en la Escuela Uruguaya de Fotografía y Video (EUF), donde hice la car
         </div>
 
         {/* Columna derecha: foto vertical ocupa toda la altura */}
-        <div className="hidden overflow-hidden bg-panel md:block">
+        <div className="h-[60vw] overflow-hidden bg-panel md:h-auto">
           {vertical ? (
             vertical.kind === "video" ? (
               <video src={vertical.url} controls className="h-full w-full object-cover" />

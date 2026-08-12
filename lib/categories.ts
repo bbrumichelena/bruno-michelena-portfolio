@@ -12,7 +12,6 @@ export const VIDEO_CATEGORIES: Category[] = [
 export const PHOTO_CATEGORIES: Category[] = [
   { slug: "retrato", label: "Retrato" },
   { slug: "moda", label: "Moda" },
-  { slug: "social", label: "Social" },
   { slug: "arquitectura", label: "Arquitectura" },
   { slug: "deportiva", label: "Deportiva" },
   { slug: "paisaje", label: "Paisaje" },

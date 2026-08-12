@@ -21,4 +21,5 @@ export const YOUTUBE_VIDEOS: Record<string, YouTubeVideo[]> = {
     { src: "/media/videos/redes-sociales/Marca de ropa_web.mp4", poster: "/media/videos/redes-sociales/Marca de ropa_poster.jpg", title: "Marca de ropa", short: true },
   ],
   "podcast": [],
+  "cortometraje": [],
 };

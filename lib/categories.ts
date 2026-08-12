@@ -6,6 +6,7 @@ export const VIDEO_CATEGORIES: Category[] = [
   { slug: "eventos-musicales", label: "Eventos Musicales" },
   { slug: "presentaciones", label: "Presentaciones" },
   { slug: "podcast", label: "Podcast" },
+  { slug: "cortometraje", label: "Cortometraje" },
 ];
 
 export const PHOTO_CATEGORIES: Category[] = [

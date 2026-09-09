@@ -73,8 +73,8 @@ export default function YouTubeGrid({ videos, showTitles = false }: Props) {
 
   return (
     <div className="columns-2 gap-3 sm:columns-3 lg:columns-4">
-      {videos.map((v) => (
-        <VideoCard key={v.id} v={v} showTitle={showTitles} />
+      {videos.map((v, i) => (
+        <VideoCard key={v.id ?? v.src ?? i} v={v} showTitle={showTitles} />
       ))}
     </div>
   );

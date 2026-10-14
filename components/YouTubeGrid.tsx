@@ -1,23 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { YouTubeVideo } from "@/lib/videos";
 
 function VideoCard({ v, showTitle }: { v: YouTubeVideo; showTitle: boolean }) {
   const [playing, setPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const isLocal = !!v.src;
   const thumb = isLocal ? (v.poster ?? null) : `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
   const embedSrc = isLocal ? null : `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
+
+  // Llamar .play() programáticamente después del render para respetar
+  // la política de autoplay en desktop (autoPlay HTML no funciona con audio)
+  useEffect(() => {
+    if (playing && isLocal && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [playing, isLocal]);
 
   return (
     <div className={`relative mb-3 overflow-hidden rounded-lg ${v.short ? "aspect-[9/16]" : "aspect-video"}`}>
       {playing ? (
         isLocal ? (
           <video
+            ref={videoRef}
             src={v.src}
             poster={v.poster}
             className="absolute inset-0 h-full w-full object-cover"
-            autoPlay
             controls
             playsInline
           />

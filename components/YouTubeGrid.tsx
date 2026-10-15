@@ -10,24 +10,25 @@ function VideoCard({ v, showTitle }: { v: YouTubeVideo; showTitle: boolean }) {
   const thumb = isLocal ? (v.poster ?? null) : `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
   const embedSrc = isLocal ? null : `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
 
-  // Para videos locales: el <video> siempre está en el DOM.
-  // .play() se llama sincrónicamente dentro del click → desktop lo permite.
   const handlePlay = () => {
-    setPlaying(true);
     if (isLocal && videoRef.current) {
+      // Mostrar y reproducir en el mismo tick del click → Safari lo permite
+      videoRef.current.style.display = "block";
       videoRef.current.play().catch(() => {});
     }
+    setPlaying(true);
   };
 
   return (
     <div className={`relative mb-3 overflow-hidden rounded-lg ${v.short ? "aspect-[9/16]" : "aspect-video"}`}>
 
-      {/* Video local: siempre montado, el overlay lo tapa hasta que se hace play */}
+      {/* Video local: en DOM pero oculto hasta que se hace click */}
       {isLocal && (
         <video
           ref={videoRef}
           src={v.src}
           poster={v.poster}
+          style={{ display: "none" }}
           className="absolute inset-0 h-full w-full object-cover"
           controls
           playsInline
@@ -44,20 +45,22 @@ function VideoCard({ v, showTitle }: { v: YouTubeVideo; showTitle: boolean }) {
         />
       )}
 
-      {/* Overlay con thumbnail y botón de play — se oculta al hacer click */}
+      {/* Overlay con thumbnail — cubre hasta que se hace click */}
       {!playing && (
         <button
           onClick={handlePlay}
-          className="group absolute inset-0 z-10 block h-full w-full bg-black"
+          className="group absolute inset-0 z-10 block h-full w-full"
           aria-label={`Reproducir ${v.title}`}
         >
-          {thumb && (
+          {thumb ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={thumb}
               alt={v.title}
               className="h-full w-full object-cover transition-transform group-hover:scale-105"
             />
+          ) : (
+            <div className="h-full w-full bg-panel" />
           )}
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity group-hover:bg-black/40">
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform group-hover:scale-110">

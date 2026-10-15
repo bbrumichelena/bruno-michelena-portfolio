@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import type { YouTubeVideo } from "@/lib/videos";
 
 function VideoCard({ v, showTitle }: { v: YouTubeVideo; showTitle: boolean }) {
@@ -10,38 +10,45 @@ function VideoCard({ v, showTitle }: { v: YouTubeVideo; showTitle: boolean }) {
   const thumb = isLocal ? (v.poster ?? null) : `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
   const embedSrc = isLocal ? null : `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
 
-  // Llamar .play() programáticamente después del render para respetar
-  // la política de autoplay en desktop (autoPlay HTML no funciona con audio)
-  useEffect(() => {
-    if (playing && isLocal && videoRef.current) {
+  // Para videos locales: el <video> siempre está en el DOM.
+  // .play() se llama sincrónicamente dentro del click → desktop lo permite.
+  const handlePlay = () => {
+    setPlaying(true);
+    if (isLocal && videoRef.current) {
       videoRef.current.play().catch(() => {});
     }
-  }, [playing, isLocal]);
+  };
 
   return (
     <div className={`relative mb-3 overflow-hidden rounded-lg ${v.short ? "aspect-[9/16]" : "aspect-video"}`}>
-      {playing ? (
-        isLocal ? (
-          <video
-            ref={videoRef}
-            src={v.src}
-            poster={v.poster}
-            className="absolute inset-0 h-full w-full object-cover"
-            controls
-            playsInline
-          />
-        ) : (
-          <iframe
-            src={embedSrc!}
-            className="absolute inset-0 h-full w-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        )
-      ) : (
+
+      {/* Video local: siempre montado, el overlay lo tapa hasta que se hace play */}
+      {isLocal && (
+        <video
+          ref={videoRef}
+          src={v.src}
+          poster={v.poster}
+          className="absolute inset-0 h-full w-full object-cover"
+          controls
+          playsInline
+        />
+      )}
+
+      {/* YouTube: iframe solo cuando está playing */}
+      {!isLocal && playing && (
+        <iframe
+          src={embedSrc!}
+          className="absolute inset-0 h-full w-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      )}
+
+      {/* Overlay con thumbnail y botón de play — se oculta al hacer click */}
+      {!playing && (
         <button
-          onClick={() => setPlaying(true)}
-          className="group relative block h-full w-full bg-black"
+          onClick={handlePlay}
+          className="group absolute inset-0 z-10 block h-full w-full bg-black"
           aria-label={`Reproducir ${v.title}`}
         >
           {thumb && (
@@ -66,6 +73,7 @@ function VideoCard({ v, showTitle }: { v: YouTubeVideo; showTitle: boolean }) {
           )}
         </button>
       )}
+
     </div>
   );
 }
